@@ -1,8 +1,15 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
+let mode = 'development';
+if (process.env.NODE_ENV === 'production') {
+  mode = 'production';
+}
+
 module.exports = {
+  mode,
   entry: path.resolve(__dirname, './src/index.tsx'),
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -30,7 +37,9 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: {
+                localIdentName: "[name]_[local]_[hash:base64:5]"
+              }
             },
           },
         ],
