@@ -1,5 +1,7 @@
 :root {
-    --black-blue: #42567a
+    --black-blue: #42567a;
+    --iris: #3877ee;
+    --fuschia: #ef5da8;
 }
 
 @font-face {

@@ -1,0 +1,48 @@
+.container {
+    position: absolute;
+    /*top: 25%;*/
+    /*left: 25%;*/
+    grid-column: 6 / 13;
+
+    width: 530px;
+    height: 530px;
+    margin-left: 55px;
+    margin-top: calc((100vh - 530px) / 2);
+    border: 1px solid rgba(48, 62, 88, 0.2);
+    border-radius: 50%;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.pagin {
+    position: absolute;
+    display: inline-block;
+    margin: 0;
+    width: 6px;
+    height: 6px;
+    text-align: center;
+    font-size: 0px;
+    color: var(--black-blue);
+    opacity: 1;
+    background: var(--black-blue);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.active {
+    grid-column: 11;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    color: var(--black-blue);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    background: #F4F5F9;
+    border: 1px solid rgba(48, 62, 88, 0.5);
+    cursor: default;
+}

@@ -1,0 +1,20 @@
+
+.year_container {
+    margin-left: 217px;
+}
+
+.year {
+    font-weight: 700;
+    font-size: 200px;
+    line-height: 160px;
+    color: var(--iris);
+}
+
+.year:first-child {
+    margin-right: 96px;
+}
+
+
+.year:last-child {
+    color: var(--fuschia);
+}
