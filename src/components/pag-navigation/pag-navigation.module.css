@@ -1,0 +1,38 @@
+.counter {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--black-blue);
+}
+
+.nav_buttons_container {
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #F4F5F9;
+    border: 1px solid rgba(66, 86, 122, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: white;
+}
+
+.btn__disable {
+    border: 1px solid rgba(66, 86, 122, 0.2);
+    cursor: default;
+}
+
+.btn__disable:hover {
+    color: #F4F5F9;
+}

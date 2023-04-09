@@ -3,12 +3,14 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(24, 1fr);
+    background-color: #F4F5F9;
 }
 
 .container {
     position: relative;
     grid-column: 5 / 23;
     display: grid;
+    grid-template-rows: max-content;
     grid-template-columns: repeat(18, 1fr);
     border: 1px solid rgba(42, 56, 112, 0.1);
 }
@@ -33,7 +35,8 @@
 
 .content {
     grid-column: 1/19;
-    margin: 140px 0 107px 0;
+    max-height: 390px;
+    margin: 170px 0 107px 0;
 }
 
 .pagination_container {
@@ -71,9 +74,3 @@
     grid-column: 2 / 4;
 }
 
-.counter {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
-    color: var(--black-blue);
-}

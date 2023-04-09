@@ -70,6 +70,13 @@ li {
     list-style: none;
 }
 
+button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    color: white;
+}
+
 body {
     min-width: 320px;
     font-family: 'PTSans', sans-serif;

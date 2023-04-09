@@ -7,6 +7,7 @@ import "swiper/css/pagination"
 import "swiper/css/scrollbar"
 import { YearItem } from "../year-item/year-item"
 import { Pagination } from "../pagination/pugination"
+import { PagNavigation } from "../pag-navigation/pag-navigation"
 
 export interface IData {
   firstYear: string
@@ -57,7 +58,11 @@ function App() {
           />
         </div>
         <div className={styles.navigation}>
-          <span className={styles.counter}>{`${activeIndex + 1}/${mockData.length}`}</span>
+          <PagNavigation
+            activeIndex={activeIndex}
+            dataLength={mockData.length}
+            setActiveIndex={setActiveIndex}
+          />
         </div>
       </div>
     </div>
