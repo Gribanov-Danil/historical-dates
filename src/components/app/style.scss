@@ -1,0 +1,27 @@
+.swiper-wrapper {
+  margin-bottom: 100px;
+}
+
+.swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  text-align: center;
+  font-size: 0px;
+  color: var(--black-blue);
+  opacity: 1;
+  background: var(--black-blue);
+}
+
+.swiper-pagination-bullet-active {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  color: var(--black-blue);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  background: #F4F5F9;
+  border: 1px solid rgba(48, 62, 88, 0.5);
+}
