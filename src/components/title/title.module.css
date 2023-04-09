@@ -1,0 +1,19 @@
+.title {
+    max-width: 433px;
+    padding-left: 80px;
+    position: relative;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 120%;
+    color: var(--black-blue);
+}
+
+.title::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background: linear-gradient(180deg, #3877EE, #EF5DA8);
+}
