@@ -30,19 +30,25 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.css$/i,
-        exclude: /node_modules/,
+        test: /\.css$/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
+              importLoaders: 1,
               modules: {
                 localIdentName: "[name]_[local]_[hash:base64:5]"
               }
             },
           },
         ],
+        include: /\.module\.css$/,
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+        exclude: /\.module\.css$/,
       },
       {
         test: /\.(jpg|png|jpeg)$/,
