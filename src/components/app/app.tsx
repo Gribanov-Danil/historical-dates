@@ -7,9 +7,10 @@ import "./index.scss"
 import { YearItem } from "../year-item/year-item"
 import { CirclePagination } from "../circle-pagination/circle-pagination"
 import { PagNavigation } from "../pag-navigation/pag-navigation"
-import { Swiper, SwiperRef, SwiperSlide, useSwiper } from "swiper/react"
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper"
 import { Slide } from "../slide/slide"
+import { Swiper as SwiperClass } from "swiper/types"
 
 export interface IData {
   firstYear: string
@@ -49,13 +50,13 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const ref = useRef<SwiperRef>(null)
-  let swiper = useSwiper()
+  const [swiper, setSwiper] = useState<SwiperClass>()
   useEffect(() => {
     if (ref?.current?.swiper) {
-      swiper = ref?.current?.swiper
+      setSwiper(ref?.current?.swiper)
     }
-  }, [ref])
-
+  }, [ref, swiper])
+  console.log(swiper)
   return (
     <div className={`${styles.grid_container}`}>
       <div className={styles.container}>
