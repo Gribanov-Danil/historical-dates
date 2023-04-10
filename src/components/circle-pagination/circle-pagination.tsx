@@ -1,21 +1,16 @@
-import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react"
+import { Dispatch, FC, SetStateAction, useRef } from "react"
 import { IData } from "../app/app"
 import style from "./pagination.module.css"
-// @ts-ignore
-import { TweenLite } from "gsap/CSSPlugin"
 
-interface IPagination {
+interface ICirclePagination {
   data: IData[]
   activeIndex: number
   setActiveIndex: Dispatch<SetStateAction<number>>
 }
 
-export const Pagination: FC<IPagination> = ({ data, activeIndex, setActiveIndex }) => {
+export const CirclePagination: FC<ICirclePagination> = ({ data, activeIndex, setActiveIndex }) => {
   const ref = useRef<HTMLSpanElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    console.log(ref)
-  })
 
   const rotatePag = (index: number, activeIndex: number) => {
     const R = 265
@@ -40,7 +35,7 @@ export const Pagination: FC<IPagination> = ({ data, activeIndex, setActiveIndex 
             <span
               ref={ref}
               key={index}
-              className={`${style.pagin} ${activeIndex === index ? style.active : ""}`}
+              className={`${style.pag} ${activeIndex === index ? style.active : ""}`}
               onClick={() => setActiveIndex(index)}
               style={{
                 left: rotatePag(index, activeIndex)[0],

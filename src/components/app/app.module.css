@@ -72,5 +72,13 @@
 
 .navigation {
     grid-column: 2 / 4;
+    max-height: 88px;
+    margin-bottom: 56px;
+}
+
+.swiper {
+    grid-column: 2/ 17;
+    position: relative;
+
 }
 

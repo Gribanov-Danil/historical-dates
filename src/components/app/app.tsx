@@ -1,13 +1,15 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { hot } from "react-hot-loader/root"
-import styles from "./app.module.css"
 import "swiper/css"
 import "swiper/css/navigation"
-import "swiper/css/pagination"
-import "swiper/css/scrollbar"
+import styles from "./app.module.css"
+import "./index.scss"
 import { YearItem } from "../year-item/year-item"
-import { Pagination } from "../pagination/pugination"
+import { CirclePagination } from "../circle-pagination/circle-pagination"
 import { PagNavigation } from "../pag-navigation/pag-navigation"
+import { Swiper, SwiperRef, SwiperSlide, useSwiper } from "swiper/react"
+import { Navigation } from "swiper"
+import { Slide } from "../slide/slide"
 
 export interface IData {
   firstYear: string
@@ -43,13 +45,25 @@ function App() {
       paginationText: "hi",
     },
   ]
-  const [state, setState] = useState(mockData)
+  const [state] = useState(mockData)
   const [activeIndex, setActiveIndex] = useState(0)
 
+  const ref = useRef<SwiperRef>(null)
+  let swiper = useSwiper()
+  useEffect(() => {
+    if (ref?.current?.swiper) {
+      swiper = ref?.current?.swiper
+    }
+  }, [ref])
+
   return (
-    <div className={styles.grid_container}>
+    <div className={`${styles.grid_container}`}>
       <div className={styles.container}>
-        <Pagination data={mockData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+        <CirclePagination
+          data={mockData}
+          activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
+        />
         <div className={styles.content}>
           <h1 className={styles.title}>Исторические даты</h1>
           <YearItem
@@ -63,6 +77,63 @@ function App() {
             dataLength={mockData.length}
             setActiveIndex={setActiveIndex}
           />
+        </div>
+        <div className={styles.swiper}>
+          <button
+            className="swiper-button-prev"
+            onClick={() => {
+              if (swiper) {
+                swiper.slidePrev()
+              }
+            }}
+          ></button>
+          <Swiper
+            ref={ref}
+            slidesPerView={3}
+            spaceBetween={80}
+            modules={[Navigation]}
+            className="my_swiper"
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            <SwiperSlide>
+              <Slide
+                title="2015"
+                description="13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Slide
+                title="2016"
+                description="Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Slide
+                title="2017"
+                description="Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Slide
+                title="2018"
+                description="Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Slide
+                title="2018"
+                description="Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11"
+              />
+            </SwiperSlide>
+          </Swiper>
+          <button
+            className="swiper-button-next"
+            onClick={() => {
+              if (swiper) {
+                swiper.slideNext()
+              }
+            }}
+          ></button>
         </div>
       </div>
     </div>

@@ -1,0 +1,38 @@
+.swiper-button-prev {
+  left: -80px;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  box-shadow: 0px 0px 15px rgba(56, 119, 238, 0.1);
+  border-radius: 50%;
+}
+
+.swiper-button-next {
+  right: -80px;
+  //top: 65px;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  box-shadow: 0px 0px 15px rgba(56, 119, 238, 0.1);
+  border-radius: 50%;
+}
+
+.swiper-button-next::after {
+  position: absolute;
+  top: -11px;
+  left: 17px;
+  content: url(../../assets/images/swiper-button-next.svg);
+}
+
+.swiper-button-prev::after {
+  position: absolute;
+  top: -11px;
+  left: 15px;
+  content: url(../../assets/images/swiper-button-prev.svg);
+}
+
+.swiper-button-disabled {
+  opacity: 1;
+  background: rgba(0,0,0,0);
+  box-shadow: none;
+}
