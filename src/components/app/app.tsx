@@ -11,12 +11,18 @@ import { Swiper, SwiperRef, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper"
 import { Slide } from "../slide/slide"
 import { Swiper as SwiperClass } from "swiper/types"
+import * as gsap from "gsap"
 
 export interface IData {
   firstYear: string
   secondYear: string
   info: any
   paginationText?: string
+}
+
+interface IPrevState {
+  firstYear: string
+  secondYear: string
 }
 
 function App() {
@@ -48,6 +54,7 @@ function App() {
   ]
   const [state] = useState(mockData)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [prevYears, setPrevYears] = useState<IPrevState>()
 
   const ref = useRef<SwiperRef>(null)
   const [swiper, setSwiper] = useState<SwiperClass>()
@@ -56,7 +63,20 @@ function App() {
       setSwiper(ref?.current?.swiper)
     }
   }, [ref, swiper])
-  console.log(swiper)
+
+  useEffect(() => {
+    setPrevYears({
+      firstYear: state[activeIndex].firstYear,
+      secondYear: state[activeIndex].secondYear,
+    })
+  }, [activeIndex])
+
+  const tl = gsap.gsap.timeline({ paused: true })
+  tl.to(".firstYear", { duration: 0.5, x: 0 })
+  const restart = () => {
+    tl.restart(true, true)
+  }
+
   return (
     <div className={`${styles.grid_container}`}>
       <div className={styles.container}>
@@ -70,6 +90,8 @@ function App() {
           <YearItem
             firstYear={state[activeIndex].firstYear}
             secondYear={state[activeIndex].secondYear}
+            prevFirstYear={typeof prevYears?.firstYear === "string" ? prevYears.firstYear : "0"}
+            prevSecondYear={typeof prevYears?.secondYear === "string" ? prevYears.secondYear : "0"}
           />
         </div>
         <div className={styles.navigation}>
@@ -77,6 +99,7 @@ function App() {
             activeIndex={activeIndex}
             dataLength={mockData.length}
             setActiveIndex={setActiveIndex}
+            onClick={restart}
           />
         </div>
         <div className={styles.swiper}>
@@ -94,7 +117,6 @@ function App() {
             spaceBetween={80}
             modules={[Navigation]}
             className="my_swiper"
-            onSwiper={(swiper) => console.log(swiper)}
           >
             <SwiperSlide>
               <Slide
