@@ -33,7 +33,7 @@ export const YearItem: FC<IYearItem> = ({
     if (yearRef) {
       gsap.gsap.from(yearRef, {
         textContent: prevYear,
-        duration: 1,
+        duration: 1.5,
         ease: gsap.Circ.easeOut,
         snap: { textContent: 1 },
       })

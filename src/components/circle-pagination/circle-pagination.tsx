@@ -2,6 +2,7 @@ import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react"
 import { IData } from "../app/app"
 import style from "./pagination.module.css"
 import * as gsap from "gsap"
+import { CirclePag } from "../circle-pag/circle-pag"
 
 interface ICirclePagination {
   data: IData[]
@@ -10,15 +11,13 @@ interface ICirclePagination {
 }
 
 export const CirclePagination: FC<ICirclePagination> = ({ data, activeIndex, setActiveIndex }) => {
-  const ref = useRef<HTMLSpanElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const rotatePag = (index: number, activeIndex: number) => {
+  const rotatePag = (index: number, activeIndex: number): [number, number] => {
     const R = 265
     const activePagSize = 56
-    const IMG_SIZE = index === activeIndex ? activePagSize : 6
+    const IMG_SIZE = activePagSize
 
-    /***/
     const radian =
       index * ((2 * Math.PI) / data.length) - Math.acos((R - (25 + 80 * 2 - activePagSize / 2)) / R)
 
@@ -29,14 +28,14 @@ export const CirclePagination: FC<ICirclePagination> = ({ data, activeIndex, set
   }
 
   const rotateCircle = (length: number, index: number) => {
-    gsap.gsap.to(".circle", {
-      duration: 1,
+    gsap.gsap.to(containerRef.current, {
+      duration: 1.5,
       rotation: -(360 / length) * index,
       ease: gsap.Circ.easeOut,
     })
 
     gsap.gsap.to(".pag", {
-      duration: 1,
+      duration: 1.5,
       rotation: (360 / length) * index,
       ease: gsap.Circ.easeOut,
     })
@@ -47,22 +46,17 @@ export const CirclePagination: FC<ICirclePagination> = ({ data, activeIndex, set
   }, [activeIndex])
 
   return (
-    <div ref={containerRef} className={`${style.container} circle`}>
+    <div ref={containerRef} className={style.container}>
       <div className={style.wrapper}>
         {data.map((dataItem, index) => {
           return (
-            <span
-              ref={ref}
+            <CirclePag
               key={index}
-              className={`${style.pag} ${activeIndex === index ? style.active : ""} pag`}
-              onClick={() => setActiveIndex(index)}
-              style={{
-                left: rotatePag(index, activeIndex)[0],
-                top: rotatePag(index, activeIndex)[1],
-              }}
-            >
-              {index + 1}
-            </span>
+              index={index}
+              setActiveIndex={setActiveIndex}
+              activeIndex={activeIndex}
+              rotatePag={rotatePag}
+            />
           )
         })}
       </div>
