@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { hot } from "react-hot-loader/root"
 import "swiper/css"
 import "swiper/css/navigation"
@@ -56,6 +56,7 @@ function App() {
   const [prevYears, setPrevYears] = useState<IPrevState>()
 
   const ref = useRef<SwiperRef>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
   const [swiper, setSwiper] = useState<SwiperClass>()
   useEffect(() => {
     if (ref?.current?.swiper) {
@@ -72,11 +73,12 @@ function App() {
 
   return (
     <div className={`${styles.grid_container}`}>
-      <div className={styles.container}>
+      <div className={styles.container} ref={gridRef}>
         <CirclePagination
           data={mockData}
           activeIndex={activeIndex}
           setActiveIndex={setActiveIndex}
+          gridRef={gridRef}
         />
         <div className={styles.content}>
           <h1 className={styles.title}>Исторические даты</h1>

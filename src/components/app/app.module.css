@@ -1,5 +1,5 @@
 .grid_container {
-    height: 100vh;
+    height: 100%;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(24, 1fr);
@@ -80,5 +80,13 @@
     grid-column: 2/ 17;
     position: relative;
 
+}
+
+@media (max-width: 1400px) {
+    .title {
+        max-width: 315px;
+        padding-left: 58px;
+        font-size: 40px;
+    }
 }
 

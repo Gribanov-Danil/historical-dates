@@ -1,11 +1,9 @@
 .container {
     position: absolute;
     grid-column: 6 / 13;
-
-    width: 530px;
-    height: 530px;
+    width: calc(100vw * calc(53 / 192));
+    height: calc(100vw * calc(53 / 192));
     margin-left: 55px;
-    margin-top: calc((100vh - 530px) / 2);
     border: 1px solid rgba(48, 62, 88, 0.2);
     border-radius: 50%;
 }

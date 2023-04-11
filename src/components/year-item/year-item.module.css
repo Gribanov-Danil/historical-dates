@@ -6,7 +6,7 @@
 .year {
     font-weight: 700;
     font-size: 200px;
-    line-height: 160px;
+    line-height: 80%;
     color: var(--iris);
 }
 
@@ -17,4 +17,37 @@
 
 .year:last-child {
     color: var(--fuschia);
+}
+
+@media (max-width: 1700px) {
+    .year {
+        font-size: 150px;
+    }
+    .year:first-child {
+        margin-right: 72px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .year {
+        font-size: 120px;
+    }
+    .year:first-child {
+        margin-right: 72px;
+    }
+    .year_container {
+        margin-left: 158px;
+    }
+}
+
+@media (max-width: 1060px) {
+    .year {
+        font-size: 85px;
+    }
+    .year:first-child {
+        margin-right: 41px;
+    }
+    .year_container {
+        margin-left: 158px;
+    }
 }

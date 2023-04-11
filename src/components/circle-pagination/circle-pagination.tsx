@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react"
+import { Dispatch, FC, RefObject, SetStateAction, useEffect, useRef, useState } from "react"
 import { IData } from "../app/app"
 import style from "./pagination.module.css"
 import * as gsap from "gsap"
@@ -8,21 +8,47 @@ interface ICirclePagination {
   data: IData[]
   activeIndex: number
   setActiveIndex: Dispatch<SetStateAction<number>>
+  gridRef: RefObject<HTMLDivElement>
 }
 
-export const CirclePagination: FC<ICirclePagination> = ({ data, activeIndex, setActiveIndex }) => {
+export const CirclePagination: FC<ICirclePagination> = ({
+  data,
+  activeIndex,
+  setActiveIndex,
+  gridRef,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [pageWidth, setPageWidth] = useState(window.innerWidth)
+  const [pageHeight, setPageHeight] = useState(window.innerHeight)
+
+  let gridElementHeight = 0
+  if (gridRef.current?.offsetHeight) {
+    gridElementHeight = gridRef.current.offsetHeight
+  }
+  console.log(pageHeight)
+  // console.log(gridElementHeight)
+  const handleWindowSizeChange = () => {
+    setPageWidth(window.innerWidth)
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange)
+    return () => window.removeEventListener("resize", handleWindowSizeChange)
+  }, [])
 
   const rotatePag = (index: number, activeIndex: number): [number, number] => {
-    const R = 265
+    const R = (pageWidth * (53 / 192)) / 2
     const activePagSize = 56
-    const IMG_SIZE = activePagSize
+    const gridColumnWidth = pageWidth / 24
 
+    // Math.acos((R + activePagSize - gridColumnWidth * 3 + activePagSize / 2) / R)
+    // Вычисление радианы смещения активной точки относительно точки (1, 0) единичной окружности
     const radian =
-      index * ((2 * Math.PI) / data.length) - Math.acos((R - (25 + 80 * 2 - activePagSize / 2)) / R)
+      index * ((2 * Math.PI) / data.length) -
+      Math.acos((R + activePagSize - gridColumnWidth * 3 + activePagSize / 2) / R)
 
-    const x = R * Math.cos(radian) - IMG_SIZE / 2
-    const y = R * Math.sin(radian) - IMG_SIZE / 2
+    const x = R * Math.cos(radian) - activePagSize / 2
+    const y = R * Math.sin(radian) - activePagSize / 2
 
     return [x + R, y + R]
   }
@@ -48,8 +74,14 @@ export const CirclePagination: FC<ICirclePagination> = ({ data, activeIndex, set
   const getPaginationText = (dataItem: IData) =>
     dataItem.paginationText ? dataItem.paginationText : ""
 
+  // margin-top: calc((100vh - calc(100vw * calc(53 / 192))) / 2);
+
   return (
-    <div ref={containerRef} className={style.container}>
+    <div
+      ref={containerRef}
+      className={style.container}
+      style={{ marginTop: (gridElementHeight - pageWidth * (53 / 192)) / 2 }}
+    >
       <div className={style.wrapper}>
         {data.map((dataItem, index) => {
           return (
