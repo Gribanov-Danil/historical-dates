@@ -36,19 +36,19 @@ function App() {
       firstYear: "2017",
       secondYear: "2025",
       info: "",
-      paginationText: "hi",
+      paginationText: "check",
     },
     {
       firstYear: "2045",
       secondYear: "2043",
       info: "",
-      paginationText: "hi",
+      paginationText: "try",
     },
     {
       firstYear: "1800",
       secondYear: "1820",
       info: "",
-      paginationText: "hi",
+      paginationText: "test",
     },
   ]
   const [state] = useState(mockData)

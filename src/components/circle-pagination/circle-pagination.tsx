@@ -45,6 +45,9 @@ export const CirclePagination: FC<ICirclePagination> = ({ data, activeIndex, set
     rotateCircle(data.length, activeIndex)
   }, [activeIndex])
 
+  const getPaginationText = (dataItem: IData) =>
+    dataItem.paginationText ? dataItem.paginationText : ""
+
   return (
     <div ref={containerRef} className={style.container}>
       <div className={style.wrapper}>
@@ -56,6 +59,7 @@ export const CirclePagination: FC<ICirclePagination> = ({ data, activeIndex, set
               setActiveIndex={setActiveIndex}
               activeIndex={activeIndex}
               rotatePag={rotatePag}
+              paginationText={getPaginationText(dataItem)}
             />
           )
         })}

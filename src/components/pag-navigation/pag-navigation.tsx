@@ -1,5 +1,5 @@
 import styles from "./pag-navigation.module.css"
-import React, { Dispatch, FC, SetStateAction } from "react"
+import { Dispatch, FC, SetStateAction, useState } from "react"
 
 interface IPagNavigation {
   activeIndex: number
@@ -7,16 +7,29 @@ interface IPagNavigation {
   setActiveIndex: Dispatch<SetStateAction<number>>
 }
 
+enum ButtonDestination {
+  PREV = -1,
+  NEXT = 1,
+}
+
 export const PagNavigation: FC<IPagNavigation> = ({ dataLength, activeIndex, setActiveIndex }) => {
   const isMaxIndex = activeIndex === dataLength - 1
   const isMinIndex = activeIndex === 0
+  const [isDisabled, setIsDisabled] = useState(false)
+
+  const onButtonClick = (condition: boolean, buttonDestination: ButtonDestination) => {
+    setActiveIndex(condition ? activeIndex : activeIndex + buttonDestination)
+    setIsDisabled(true)
+    setTimeout(() => setIsDisabled(false), 800)
+  }
   return (
     <>
       <span className={styles.counter}>{`${activeIndex + 1}/${dataLength}`}</span>
       <div className={styles.nav_buttons_container}>
         <button
           className={`${styles.btn} ${isMinIndex ? styles.btn__disable : ""}`}
-          onClick={() => setActiveIndex(isMinIndex ? activeIndex : activeIndex - 1)}
+          onClick={() => onButtonClick(isMinIndex, ButtonDestination.PREV)}
+          disabled={isDisabled}
         >
           <svg
             width="10"
@@ -34,7 +47,8 @@ export const PagNavigation: FC<IPagNavigation> = ({ dataLength, activeIndex, set
         </button>
         <button
           className={`${styles.btn} ${isMaxIndex ? styles.btn__disable : ""}`}
-          onClick={() => setActiveIndex(isMaxIndex ? activeIndex : activeIndex + 1)}
+          onClick={() => onButtonClick(isMaxIndex, ButtonDestination.NEXT)}
+          disabled={isDisabled}
         >
           <svg
             width="10"
