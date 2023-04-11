@@ -1,6 +1,7 @@
-import { Dispatch, FC, SetStateAction, useRef } from "react"
+import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react"
 import { IData } from "../app/app"
 import style from "./pagination.module.css"
+import * as gsap from "gsap"
 
 interface ICirclePagination {
   data: IData[]
@@ -27,15 +28,33 @@ export const CirclePagination: FC<ICirclePagination> = ({ data, activeIndex, set
     return [x + R, y + R]
   }
 
+  const rotateCircle = (length: number, index: number) => {
+    gsap.gsap.to(".circle", {
+      duration: 1,
+      rotation: -(360 / length) * index,
+      ease: gsap.Circ.easeOut,
+    })
+
+    gsap.gsap.to(".pag", {
+      duration: 1,
+      rotation: (360 / length) * index,
+      ease: gsap.Circ.easeOut,
+    })
+  }
+
+  useEffect(() => {
+    rotateCircle(data.length, activeIndex)
+  }, [activeIndex])
+
   return (
-    <div ref={containerRef} className={style.container}>
+    <div ref={containerRef} className={`${style.container} circle`}>
       <div className={style.wrapper}>
-        {data.map((data, index) => {
+        {data.map((dataItem, index) => {
           return (
             <span
               ref={ref}
               key={index}
-              className={`${style.pag} ${activeIndex === index ? style.active : ""}`}
+              className={`${style.pag} ${activeIndex === index ? style.active : ""} pag`}
               onClick={() => setActiveIndex(index)}
               style={{
                 left: rotatePag(index, activeIndex)[0],

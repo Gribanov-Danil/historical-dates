@@ -11,7 +11,6 @@ import { Swiper, SwiperRef, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper"
 import { Slide } from "../slide/slide"
 import { Swiper as SwiperClass } from "swiper/types"
-import * as gsap from "gsap"
 
 export interface IData {
   firstYear: string
@@ -71,12 +70,6 @@ function App() {
     })
   }, [activeIndex])
 
-  const tl = gsap.gsap.timeline({ paused: true })
-  tl.to(".firstYear", { duration: 0.5, x: 0 })
-  const restart = () => {
-    tl.restart(true, true)
-  }
-
   return (
     <div className={`${styles.grid_container}`}>
       <div className={styles.container}>
@@ -99,7 +92,6 @@ function App() {
             activeIndex={activeIndex}
             dataLength={mockData.length}
             setActiveIndex={setActiveIndex}
-            onClick={restart}
           />
         </div>
         <div className={styles.swiper}>
