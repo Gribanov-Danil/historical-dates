@@ -18,10 +18,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #F4F5F9;
+    background-color: rgba(0,0,0,0);
     border: 1px solid rgba(66, 86, 122, 0.5);
     border-radius: 50%;
     cursor: pointer;
+    transition: 0.15s ease-out;
 }
 
 .btn:hover {
@@ -34,5 +35,5 @@
 }
 
 .btn__disable:hover {
-    color: #F4F5F9;
+    background-color: rgba(0,0,0,0);
 }
