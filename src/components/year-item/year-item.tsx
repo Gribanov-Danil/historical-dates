@@ -5,10 +5,18 @@ import { Circ, gsap } from "gsap"
 interface IYearItem {
   firstYear: string
   secondYear: string
-  prevFirstYear: string
-  prevSecondYear: string
+  prevFirstYear?: string
+  prevSecondYear?: string
 }
 
+/**
+ * Создаёт блок с начальным и конечным годом временного отрещка
+ *
+ * @param { firstYear } firstYear Год, с которого начинается отрезок
+ * @param { secondYear } secondYear Год, к которому заканчивается отрезок
+ * @param { prevFirstYear } prevFirstYear Предыдущее значение года, начинающего отрезок ( для анимации )
+ * @param { prevSecondYear } prevSecondYear Предыдущее значение года, заканчивающего отрезок ( для анимации )
+ */
 export const YearItem: FC<IYearItem> = ({
   firstYear,
   secondYear,
@@ -29,8 +37,8 @@ export const YearItem: FC<IYearItem> = ({
     }
   }, [ref1, ref2])
 
-  const changeYear = (yearRef: HTMLSpanElement | undefined, prevYear: string) => {
-    if (yearRef) {
+  const changeYear = (yearRef: HTMLSpanElement | undefined, prevYear: string | undefined) => {
+    if (yearRef && prevYear) {
       gsap.from(yearRef, {
         textContent: prevYear,
         duration: 1.5,
@@ -46,7 +54,7 @@ export const YearItem: FC<IYearItem> = ({
   }, [firstYear, secondYear])
 
   return (
-    <div className={`firstYear ${styles.year_container}`}>
+    <div className={styles.year_container}>
       <span ref={ref1} className={styles.year}>
         {firstYear}
       </span>

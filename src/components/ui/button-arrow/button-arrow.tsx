@@ -7,6 +7,12 @@ interface IButtonArrow {
   direction: "left" | "right"
 }
 
+/**
+ * Точку навигации в форме окружности
+ *
+ * @param { isActive } isActive Условие доступности кнопки для клика
+ * @param { direction } direction Направление "стрелки" на кнопке
+ */
 export const ButtonArrow: FC<IButtonArrow> = ({ isActive, direction }) => {
   const [innerWidth] = useState(getInnerWidth())
   return (

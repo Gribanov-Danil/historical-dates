@@ -6,6 +6,12 @@ export interface ISlide {
   description: string
 }
 
+/**
+ * Карточка с фактами для Swiper
+ *
+ * @param { title } title Год, в котором произошло описанное событие
+ * @param { description } description Описание события
+ */
 export const Slide: FC<ISlide> = ({ title, description }) => {
   return (
     <article className="slide">

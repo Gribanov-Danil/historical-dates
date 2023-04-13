@@ -14,6 +14,13 @@ enum ButtonDestination {
   NEXT = 1,
 }
 
+/**
+ * Кнопки навигации с счетчиком
+ *
+ * @param { dataLength } dataLength размер массива IData
+ * @param { activeIndex } activeIndex Индекс активной точки
+ * @param { setActiveIndex } setActiveIndex Диспатч для изменения активной точки
+ */
 export const PagNavigation: FC<IPagNavigation> = ({ dataLength, activeIndex, setActiveIndex }) => {
   const isMaxIndex = activeIndex === dataLength - 1
   const isMinIndex = activeIndex === 0

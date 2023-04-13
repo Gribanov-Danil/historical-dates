@@ -10,6 +10,15 @@ interface ICirclePag {
   paginationText: string
 }
 
+/**
+ * Точку навигации в форме окружности
+ *
+ * @param { index } index Индекс точки
+ * @param { activeIndex } activeIndex Индекс активной точки
+ * @param { setActiveIndex } setActiveIndex Диспатч для изменения активной точки
+ * @param { rotatePag } rotatePag Функция расчета смещения точки для выставления на окружности
+ * @param { paginationText } paginationText Текст, располагающийся рядом с активной точкой
+ */
 export const CirclePag: FC<ICirclePag> = ({
   index,
   activeIndex,

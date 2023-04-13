@@ -23,15 +23,23 @@ interface IPrevState {
   secondYear: string
 }
 
-interface ITest {
+interface ISwiperState {
   isBeginning: boolean
   isEnd: boolean
 }
 
 interface IHistoricalDates {
   data: IData[]
+  title: string
 }
-export const HistoricalDates: FC<IHistoricalDates> = ({ data }) => {
+
+/**
+ * Блок "Исторические даты" с заголовком, навигацией и свайпером
+ *
+ * @param { data } data Массив элементов типа IData
+ * @param { title } title Заголовок блока
+ */
+export const HistoricalDates: FC<IHistoricalDates> = ({ data, title }) => {
   const [state] = useState(data)
   const [activeIndex, setActiveIndex] = useState(0)
   const [prevYears, setPrevYears] = useState<IPrevState>()
@@ -39,7 +47,7 @@ export const HistoricalDates: FC<IHistoricalDates> = ({ data }) => {
   const ref = useRef<SwiperRef>(null)
   const gridRef = useRef<HTMLDivElement>(null)
   const [swiper, setSwiper] = useState<SwiperClass>()
-  const [swiperState, setSwiperState] = useState<ITest>({ isBeginning: true, isEnd: false })
+  const [swiperState, setSwiperState] = useState<ISwiperState>({ isBeginning: true, isEnd: false })
   const [pageWidth] = useState(getInnerWidth())
 
   const changeInfo = () => {
@@ -90,7 +98,7 @@ export const HistoricalDates: FC<IHistoricalDates> = ({ data }) => {
           </div>
         )}
         <div className={styles.content}>
-          <h1 className={styles.title}>Исторические даты</h1>
+          <h1 className={styles.title}>{title}</h1>
           <YearItem
             firstYear={state[activeIndex].firstYear}
             secondYear={state[activeIndex].secondYear}
@@ -118,7 +126,6 @@ export const HistoricalDates: FC<IHistoricalDates> = ({ data }) => {
           <Swiper
             ref={ref}
             slidesPerView={1.4}
-            //1.6
             spaceBetween={25}
             modules={[Navigation]}
             className="my_swiper"

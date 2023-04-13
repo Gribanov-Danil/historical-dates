@@ -6,7 +6,7 @@ import { HistoricalDates } from "../historical-dates/historical-dates"
 import { testData } from "../../utils/constants/test-data"
 
 function App() {
-  return <HistoricalDates data={testData} />
+  return <HistoricalDates data={testData} title="Исторические даты" />
 }
 
 export default hot(App)

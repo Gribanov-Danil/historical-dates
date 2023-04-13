@@ -12,6 +12,14 @@ interface ICirclePagination {
   gridRef: RefObject<HTMLDivElement>
 }
 
+/**
+ * Окружность навигации, с расставленной на ней пагинацией
+ *
+ * @param { data } data Массив элементов типа IData
+ * @param { activeIndex } activeIndex Индекс активной точки
+ * @param { setActiveIndex } setActiveIndex Диспатч для изменения активной точки
+ * @param { gridRef } gridRef Ссылка на объект с сеткой, для вычисления высоты блока
+ */
 export const CirclePagination: FC<ICirclePagination> = ({
   data,
   activeIndex,

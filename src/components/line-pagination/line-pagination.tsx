@@ -8,6 +8,13 @@ interface ILinePagination {
   setActiveIndex: Dispatch<SetStateAction<number>>
 }
 
+/**
+ * Навигация, расположенная в линию
+ *
+ * @param { data } data Массив элементов типа IData
+ * @param { activeIndex } activeIndex Индекс активной точки
+ * @param { setActiveIndex } setActiveIndex Диспатч для изменения активной точки
+ */
 export const LinePagination: FC<ILinePagination> = ({ data, activeIndex, setActiveIndex }) => {
   return (
     <>
