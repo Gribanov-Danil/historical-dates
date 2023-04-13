@@ -1,8 +1,15 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
+let mode = 'development';
+if (process.env.NODE_ENV === 'production') {
+  mode = 'production';
+}
+
 module.exports = {
+  mode,
   entry: path.resolve(__dirname, './src/index.tsx'),
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -23,17 +30,33 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.css$/i,
-        exclude: /node_modules/,
+        test: /\.css$/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
-              modules: true,
+              importLoaders: 1,
+              modules: {
+                localIdentName: "[name]_[local]_[hash:base64:5]"
+              }
             },
           },
         ],
+        include: /\.module\.css$/,
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+        exclude: /\.module\.css$/,
       },
       {
         test: /\.(jpg|png|jpeg)$/,
