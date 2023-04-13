@@ -16,7 +16,7 @@ export type TSlide = {
  */
 export const Slide: FC<TSlide> = ({ title, description, slideHash }) => {
   return (
-    <article className={`slide${slideHash}`}>
+    <article className={`slide_${slideHash}`}>
       <div className={styles.title}>{title}</div>
       <div className={styles.description}>{description}</div>
     </article>

@@ -69,18 +69,18 @@ export const HistoricalDates: FC<IHistoricalDates> = ({ data, title }) => {
   const [swiper, setSwiper] = useState<SwiperClass>()
   const [swiperState, setSwiperState] = useState<ISwiperState>({ isBeginning: true, isEnd: false })
   const [pageWidth] = useState(getInnerWidth())
-  const [slideHash] = useState(uuid())
+  const [slideHash] = useState(uuid().slice(-6))
 
   const changeInfo = (slideHash: string) => {
     gsap
       .timeline()
-      .to(`.slide${slideHash}`, {
+      .to(`.slide_${slideHash}`, {
         opacity: 0,
         y: 10,
         duration: 0.3,
         ease: Circ.easeInOut,
       })
-      .to(`.slide${slideHash}`, {
+      .to(`.slide_${slideHash}`, {
         opacity: 1,
         y: 0,
         duration: 1,
@@ -159,9 +159,9 @@ export const HistoricalDates: FC<IHistoricalDates> = ({ data, title }) => {
             breakpoints={swiperBreakpoints}
           >
             <>
-              {data[activeIndex].info.map((dataItem) => {
+              {data[activeIndex].info.map((dataItem, index) => {
                 return (
-                  <SwiperSlide key={uuid()}>
+                  <SwiperSlide key={index}>
                     <Slide
                       title={dataItem.title}
                       description={dataItem.description}

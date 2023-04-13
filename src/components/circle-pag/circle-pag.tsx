@@ -68,7 +68,7 @@ export const CirclePag: FC<ICirclePag> = ({
   return (
     <>
       <div
-        className={`${style.pag_container} pag${pagHash}`}
+        className={`${style.pag_container} pag_${pagHash}`}
         style={{
           left: rotatePag(index)[0],
           top: rotatePag(index)[1],

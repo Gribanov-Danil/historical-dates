@@ -29,7 +29,7 @@ export const CirclePagination: FC<ICirclePagination> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [pageWidth, setPageWidth] = useState(getInnerWidth())
-  const [pagHash] = useState(uuid())
+  const [pagHash] = useState(uuid().slice(-6))
 
   let gridElementHeight = 0
   if (gridRef.current?.offsetHeight) {
@@ -70,7 +70,7 @@ export const CirclePagination: FC<ICirclePagination> = ({
       ease: Circ.easeOut,
     })
 
-    gsap.to(`.pag${pagHash}`, {
+    gsap.to(`.pag_${pagHash}`, {
       duration: 1.5,
       rotation: (360 / length) * index,
       ease: Circ.easeOut,
@@ -94,7 +94,7 @@ export const CirclePagination: FC<ICirclePagination> = ({
         {data.map((dataItem, index) => {
           return (
             <CirclePag
-              key={uuid()}
+              key={index}
               index={index}
               setActiveIndex={setActiveIndex}
               activeIndex={activeIndex}
