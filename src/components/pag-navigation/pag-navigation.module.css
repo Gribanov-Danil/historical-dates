@@ -47,3 +47,16 @@
         gap: 14px;
     }
 }
+
+@media (max-width: 1060px) {
+    .btn {
+        width: 25px;
+        height: 25px;
+    }
+    .nav_buttons_container {
+        gap: 8px;
+    }
+    .counter {
+        margin-bottom: 10px;
+    }
+}

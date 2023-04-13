@@ -36,10 +36,6 @@ export const CirclePagination: FC<ICirclePagination> = ({
   const getContainerMarginTop = (pageWidth: number) =>
     pageWidth <= 820 ? 0 : gridElementHeight * 0.4444 - (pageWidth * (53 / 192)) / 2
 
-  // useEffect(() => {
-  //
-  // })
-
   const rotatePag = (index: number): [number, number] => {
     const R = (pageWidth * (53 / 192)) / 2
     const activePagSize = 56

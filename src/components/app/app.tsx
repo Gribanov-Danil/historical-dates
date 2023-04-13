@@ -11,6 +11,8 @@ import { Swiper, SwiperRef, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper"
 import { Slide } from "../slide/slide"
 import { Swiper as SwiperClass } from "swiper/types"
+import { getInnerWidth } from "../../utils/getInnerWidth"
+import { LinePagination } from "../line-pagination/line-pagination"
 
 export interface IData {
   firstYear: string
@@ -76,6 +78,8 @@ function App() {
   const gridRef = useRef<HTMLDivElement>(null)
   const [swiper, setSwiper] = useState<SwiperClass>()
   const [swiperState, setSwiperState] = useState<ITest>({ isBeginning: true, isEnd: false })
+  const [pageWidth] = useState(getInnerWidth())
+
   useEffect(() => {
     if (ref?.current?.swiper) {
       setSwiper(ref?.current?.swiper)
@@ -92,12 +96,22 @@ function App() {
   return (
     <div className={`${styles.grid_container}`}>
       <div className={styles.container} ref={gridRef}>
-        <CirclePagination
-          data={mockData}
-          activeIndex={activeIndex}
-          setActiveIndex={setActiveIndex}
-          gridRef={gridRef}
-        />
+        {pageWidth > 820 ? (
+          <CirclePagination
+            data={mockData}
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
+            gridRef={gridRef}
+          />
+        ) : (
+          <div className={styles.pagination_container}>
+            <LinePagination
+              data={mockData}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+            />
+          </div>
+        )}
         <div className={styles.content}>
           <h1 className={styles.title}>Исторические даты</h1>
           <YearItem
@@ -107,6 +121,7 @@ function App() {
             prevSecondYear={typeof prevYears?.secondYear === "string" ? prevYears.secondYear : "0"}
           />
         </div>
+        <span className={styles.line}></span>
         <div className={styles.navigation}>
           <PagNavigation
             activeIndex={activeIndex}
@@ -125,7 +140,8 @@ function App() {
           ></button>
           <Swiper
             ref={ref}
-            slidesPerView={1.5}
+            slidesPerView={1.4}
+            //1.6
             spaceBetween={25}
             modules={[Navigation]}
             className="my_swiper"
@@ -141,6 +157,14 @@ function App() {
                 spaceBetween: 80,
               },
               820: {
+                slidesPerView: 2,
+                spaceBetween: 80,
+              },
+              650: {
+                slidesPerView: 3,
+                spaceBetween: 50,
+              },
+              512: {
                 slidesPerView: 2,
                 spaceBetween: 50,
               },

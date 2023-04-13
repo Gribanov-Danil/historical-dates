@@ -1,5 +1,7 @@
 import styles from "./pag-navigation.module.css"
 import { Dispatch, FC, SetStateAction, useState } from "react"
+import { getInnerWidth } from "../../utils/getInnerWidth"
+import { ButtonArrow } from "../ui/button-arrow/button-arrow"
 
 interface IPagNavigation {
   activeIndex: number
@@ -7,7 +9,7 @@ interface IPagNavigation {
   setActiveIndex: Dispatch<SetStateAction<number>>
 }
 
-export enum ButtonDestination {
+enum ButtonDestination {
   PREV = -1,
   NEXT = 1,
 }
@@ -19,9 +21,12 @@ export const PagNavigation: FC<IPagNavigation> = ({ dataLength, activeIndex, set
 
   const onButtonClick = (condition: boolean, buttonDestination: ButtonDestination) => {
     setActiveIndex(condition ? activeIndex : activeIndex + buttonDestination)
-    setIsDisabled(true)
-    setTimeout(() => setIsDisabled(false), 800)
+    if (getInnerWidth() >= 821) {
+      setIsDisabled(true)
+      setTimeout(() => setIsDisabled(false), 800)
+    }
   }
+
   return (
     <>
       <span className={styles.counter}>
@@ -35,38 +40,14 @@ export const PagNavigation: FC<IPagNavigation> = ({ dataLength, activeIndex, set
           onClick={() => onButtonClick(isMinIndex, ButtonDestination.PREV)}
           disabled={isDisabled}
         >
-          <svg
-            width="10"
-            height="14"
-            viewBox="0 0 10 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.49988 0.750001L2.24988 7L8.49988 13.25"
-              stroke={`${isMinIndex ? "#9ba6ba" : "#42567A"}`}
-              strokeWidth="2"
-            />
-          </svg>
+          <ButtonArrow isActive={isMinIndex} direction="left" />
         </button>
         <button
           className={`${styles.btn} ${isMaxIndex ? styles.btn__disable : ""}`}
           onClick={() => onButtonClick(isMaxIndex, ButtonDestination.NEXT)}
           disabled={isDisabled}
         >
-          <svg
-            width="10"
-            height="14"
-            viewBox="0 0 10 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1 13.5L7.25 7.25L1 1"
-              stroke={`${isMaxIndex ? "#9ba6ba" : "#42567A"}`}
-              strokeWidth="2"
-            />
-          </svg>
+          <ButtonArrow isActive={isMaxIndex} direction="right" />
         </button>
       </div>
     </>
