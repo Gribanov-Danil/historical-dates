@@ -1,6 +1,6 @@
-import { IData } from "../app/app"
 import { Dispatch, FC, SetStateAction } from "react"
 import style from "./line-pagination.module.css"
+import { IData } from "../historical-dates/historical-dates"
 
 interface ILinePagination {
   data: IData[]

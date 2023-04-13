@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react"
 import styles from "./year-item.module.css"
-import * as gsap from "gsap"
+import { Circ, gsap } from "gsap"
 
 interface IYearItem {
   firstYear: string
@@ -31,10 +31,10 @@ export const YearItem: FC<IYearItem> = ({
 
   const changeYear = (yearRef: HTMLSpanElement | undefined, prevYear: string) => {
     if (yearRef) {
-      gsap.gsap.from(yearRef, {
+      gsap.from(yearRef, {
         textContent: prevYear,
         duration: 1.5,
-        ease: gsap.Circ.easeOut,
+        ease: Circ.easeOut,
         snap: { textContent: 1 },
       })
     }

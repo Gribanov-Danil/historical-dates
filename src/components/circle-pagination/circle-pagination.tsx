@@ -1,9 +1,9 @@
 import { Dispatch, FC, RefObject, SetStateAction, useEffect, useRef, useState } from "react"
-import { IData } from "../app/app"
 import style from "./pagination.module.css"
-import * as gsap from "gsap"
+import { Circ, gsap } from "gsap"
 import { CirclePag } from "../circle-pag/circle-pag"
 import { getInnerWidth } from "../../utils/getInnerWidth"
+import { IData } from "../historical-dates/historical-dates"
 
 interface ICirclePagination {
   data: IData[]
@@ -54,16 +54,16 @@ export const CirclePagination: FC<ICirclePagination> = ({
   }
 
   const rotateCircle = (length: number, index: number) => {
-    gsap.gsap.to(containerRef.current, {
+    gsap.to(containerRef.current, {
       duration: 1.5,
       rotation: -(360 / length) * index,
-      ease: gsap.Circ.easeOut,
+      ease: Circ.easeOut,
     })
 
-    gsap.gsap.to(".pag", {
+    gsap.to(".pag", {
       duration: 1.5,
       rotation: (360 / length) * index,
-      ease: gsap.Circ.easeOut,
+      ease: Circ.easeOut,
     })
   }
 

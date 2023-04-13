@@ -1,6 +1,6 @@
 import style from "./circle-pag.module.css"
 import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react"
-import * as gsap from "gsap"
+import { gsap, Sine } from "gsap"
 
 interface ICirclePag {
   index: number
@@ -20,22 +20,22 @@ export const CirclePag: FC<ICirclePag> = ({
   const ref = useRef<HTMLDivElement>(null)
 
   const animation = (duration: number) => {
-    gsap.gsap.to(ref.current, {
+    gsap.to(ref.current, {
       delay: 0.1,
       fontSize: 20,
     })
-    gsap.gsap.to(ref.current, {
+    gsap.to(ref.current, {
       duration: duration,
       opacity: 1,
-      ease: gsap.Sine.easeInOut,
+      ease: Sine.easeInOut,
     })
   }
 
   const hide = () => {
-    gsap.gsap.to(ref.current, {
+    gsap.to(ref.current, {
       duration: 0.2,
       opacity: 0,
-      ease: gsap.Sine.easeInOut,
+      ease: Sine.easeInOut,
     })
   }
 
