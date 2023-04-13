@@ -9,15 +9,16 @@ import { CirclePagination } from "../circle-pagination/circle-pagination"
 import { PagNavigation } from "../pag-navigation/pag-navigation"
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper"
-import { Slide } from "../slide/slide"
+import { ISlide, Slide } from "../slide/slide"
 import { Swiper as SwiperClass } from "swiper/types"
 import { getInnerWidth } from "../../utils/getInnerWidth"
 import { LinePagination } from "../line-pagination/line-pagination"
+import * as gsap from "gsap"
 
 export interface IData {
   firstYear: string
   secondYear: string
-  info: any
+  info: ISlide[]
   paginationText?: string
 }
 
@@ -36,37 +37,193 @@ function App() {
     {
       firstYear: "2015",
       secondYear: "2022",
-      info: "",
+      info: [
+        {
+          title: "2015",
+          description:
+            "13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды",
+        },
+        {
+          title: "2016",
+          description:
+            "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+        {
+          title: "2017",
+          description:
+            "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+        },
+        {
+          title: "2018",
+          description:
+            "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+        },
+        {
+          title: "2018",
+          description:
+            "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+      ],
       paginationText: "hi",
     },
     {
       firstYear: "2017",
       secondYear: "2025",
-      info: "",
+      info: [
+        {
+          title: "1015",
+          description:
+            "13 сентября — частное солнечное затмение, удалённую из всех обнаруженных галактик, по",
+        },
+        {
+          title: "1216",
+          description:
+            "ю из всех обнаруженных галактик,нную из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+        {
+          title: "9997",
+          description:
+            "ый в мире электрический грузовик Tesla SeКомпания Tesla официально представила первmi",
+        },
+        {
+          title: "2558",
+          description:
+            "Компания Tesla официально представи электрический грузовик Tesla Semла первый в миреi",
+        },
+        {
+          title: "2185",
+          description:
+            "Телескоп «Хаббл»бнаруженных галактик, получившую обозначение GN-z11 обнаружил самую удалённую из всех о",
+        },
+      ],
       paginationText: "check",
     },
     {
       firstYear: "2045",
       secondYear: "2043",
-      info: "",
+      info: [
+        {
+          title: "2015",
+          description:
+            "13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды",
+        },
+        {
+          title: "2016",
+          description:
+            "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+        {
+          title: "2017",
+          description:
+            "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+        },
+        {
+          title: "2018",
+          description:
+            "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+        },
+        {
+          title: "2018",
+          description:
+            "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+      ],
       paginationText: "try",
     },
     {
       firstYear: "1800",
       secondYear: "1820",
-      info: "",
+      info: [
+        {
+          title: "2015",
+          description:
+            "13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды",
+        },
+        {
+          title: "2016",
+          description:
+            "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+        {
+          title: "2017",
+          description:
+            "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+        },
+        {
+          title: "2018",
+          description:
+            "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+        },
+        {
+          title: "2018",
+          description:
+            "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+      ],
       paginationText: "test",
     },
     {
       firstYear: "1914",
       secondYear: "1918",
-      info: "",
+      info: [
+        {
+          title: "2015",
+          description:
+            "13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды",
+        },
+        {
+          title: "2016",
+          description:
+            "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+        {
+          title: "2017",
+          description:
+            "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+        },
+        {
+          title: "2018",
+          description:
+            "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+        },
+        {
+          title: "2018",
+          description:
+            "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+      ],
       paginationText: "WW1",
     },
     {
       firstYear: "2015",
       secondYear: "2022",
-      info: "",
+      info: [
+        {
+          title: "2015",
+          description:
+            "13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды",
+        },
+        {
+          title: "2016",
+          description:
+            "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+        {
+          title: "2017",
+          description:
+            "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+        },
+        {
+          title: "2018",
+          description:
+            "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+        },
+        {
+          title: "2018",
+          description:
+            "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+        },
+      ],
       paginationText: "Наука",
     },
   ]
@@ -80,6 +237,24 @@ function App() {
   const [swiperState, setSwiperState] = useState<ITest>({ isBeginning: true, isEnd: false })
   const [pageWidth] = useState(getInnerWidth())
 
+  const changeInfo = () => {
+    gsap.gsap
+      .timeline()
+      .to(".slide", {
+        opacity: 0,
+        y: 10,
+        duration: 0.3,
+        ease: gsap.Circ.easeInOut,
+      })
+      .to(".slide", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: gsap.Circ.easeOut,
+      })
+  }
+
   useEffect(() => {
     if (ref?.current?.swiper) {
       setSwiper(ref?.current?.swiper)
@@ -91,6 +266,7 @@ function App() {
       firstYear: state[activeIndex].firstYear,
       secondYear: state[activeIndex].secondYear,
     })
+    changeInfo()
   }, [activeIndex])
 
   return (
@@ -170,36 +346,15 @@ function App() {
               },
             }}
           >
-            <SwiperSlide>
-              <Slide
-                title="2015"
-                description="13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Slide
-                title="2016"
-                description="Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Slide
-                title="2017"
-                description="Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Slide
-                title="2018"
-                description="Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Slide
-                title="2018"
-                description="Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11"
-              />
-            </SwiperSlide>
+            <>
+              {mockData[activeIndex].info.map((dataItem, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <Slide title={dataItem.title} description={dataItem.description} />
+                  </SwiperSlide>
+                )
+              })}
+            </>
           </Swiper>
           <button
             className={`swiper-button-next ${swiperState.isEnd ? "disable" : ""}`}
