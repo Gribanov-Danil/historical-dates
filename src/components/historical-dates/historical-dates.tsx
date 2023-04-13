@@ -8,13 +8,14 @@ import { LinePagination } from "../line-pagination/line-pagination"
 import { YearItem } from "../year-item/year-item"
 import { PagNavigation } from "../pag-navigation/pag-navigation"
 import { Navigation } from "swiper"
-import { ISlide, Slide } from "../slide/slide"
+import { Slide, TSlide } from "../slide/slide"
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react"
+import uuid from "react-uuid"
 
 export interface IData {
   firstYear: string
   secondYear: string
-  info: ISlide[]
+  info: Pick<TSlide, "title" | "description">[]
   paginationText?: string
 }
 
@@ -68,17 +69,18 @@ export const HistoricalDates: FC<IHistoricalDates> = ({ data, title }) => {
   const [swiper, setSwiper] = useState<SwiperClass>()
   const [swiperState, setSwiperState] = useState<ISwiperState>({ isBeginning: true, isEnd: false })
   const [pageWidth] = useState(getInnerWidth())
+  const [slideHash] = useState(uuid())
 
-  const changeInfo = () => {
+  const changeInfo = (slideHash: string) => {
     gsap
       .timeline()
-      .to(".slide", {
+      .to(`.slide${slideHash}`, {
         opacity: 0,
         y: 10,
         duration: 0.3,
         ease: Circ.easeInOut,
       })
-      .to(".slide", {
+      .to(`.slide${slideHash}`, {
         opacity: 1,
         y: 0,
         duration: 1,
@@ -98,7 +100,7 @@ export const HistoricalDates: FC<IHistoricalDates> = ({ data, title }) => {
       firstYear: state[activeIndex].firstYear,
       secondYear: state[activeIndex].secondYear,
     })
-    changeInfo()
+    changeInfo(slideHash)
   }, [activeIndex])
 
   return (
@@ -157,10 +159,14 @@ export const HistoricalDates: FC<IHistoricalDates> = ({ data, title }) => {
             breakpoints={swiperBreakpoints}
           >
             <>
-              {data[activeIndex].info.map((dataItem, index) => {
+              {data[activeIndex].info.map((dataItem) => {
                 return (
-                  <SwiperSlide key={index}>
-                    <Slide title={dataItem.title} description={dataItem.description} />
+                  <SwiperSlide key={uuid()}>
+                    <Slide
+                      title={dataItem.title}
+                      description={dataItem.description}
+                      slideHash={slideHash}
+                    />
                   </SwiperSlide>
                 )
               })}

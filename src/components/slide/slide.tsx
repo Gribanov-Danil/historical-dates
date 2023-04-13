@@ -1,9 +1,10 @@
 import { FC } from "react"
 import styles from "./slide.module.css"
 
-export interface ISlide {
+export type TSlide = {
   title: string
   description: string
+  slideHash: string
 }
 
 /**
@@ -11,10 +12,11 @@ export interface ISlide {
  *
  * @param { title } title Год, в котором произошло описанное событие
  * @param { description } description Описание события
+ * @param { slideHash } slideHash Хэш для класса slide
  */
-export const Slide: FC<ISlide> = ({ title, description }) => {
+export const Slide: FC<TSlide> = ({ title, description, slideHash }) => {
   return (
-    <article className="slide">
+    <article className={`slide${slideHash}`}>
       <div className={styles.title}>{title}</div>
       <div className={styles.description}>{description}</div>
     </article>

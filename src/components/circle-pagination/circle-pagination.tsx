@@ -4,6 +4,7 @@ import { Circ, gsap } from "gsap"
 import { CirclePag } from "../circle-pag/circle-pag"
 import { getInnerWidth } from "../../utils/getInnerWidth"
 import { IData } from "../historical-dates/historical-dates"
+import uuid from "react-uuid"
 
 interface ICirclePagination {
   data: IData[]
@@ -28,6 +29,7 @@ export const CirclePagination: FC<ICirclePagination> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [pageWidth, setPageWidth] = useState(getInnerWidth())
+  const [pagHash] = useState(uuid())
 
   let gridElementHeight = 0
   if (gridRef.current?.offsetHeight) {
@@ -61,14 +63,14 @@ export const CirclePagination: FC<ICirclePagination> = ({
     return [x + R, y + R]
   }
 
-  const rotateCircle = (length: number, index: number) => {
+  const rotateCircle = (length: number, index: number, pagHash: string) => {
     gsap.to(containerRef.current, {
       duration: 1.5,
       rotation: -(360 / length) * index,
       ease: Circ.easeOut,
     })
 
-    gsap.to(".pag", {
+    gsap.to(`.pag${pagHash}`, {
       duration: 1.5,
       rotation: (360 / length) * index,
       ease: Circ.easeOut,
@@ -76,7 +78,7 @@ export const CirclePagination: FC<ICirclePagination> = ({
   }
 
   useEffect(() => {
-    rotateCircle(data.length, activeIndex)
+    rotateCircle(data.length, activeIndex, pagHash)
   }, [activeIndex])
 
   const getPaginationText = (dataItem: IData) =>
@@ -92,12 +94,13 @@ export const CirclePagination: FC<ICirclePagination> = ({
         {data.map((dataItem, index) => {
           return (
             <CirclePag
-              key={index}
+              key={uuid()}
               index={index}
               setActiveIndex={setActiveIndex}
               activeIndex={activeIndex}
               rotatePag={rotatePag}
               paginationText={getPaginationText(dataItem)}
+              pagHash={pagHash}
             />
           )
         })}

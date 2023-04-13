@@ -8,6 +8,7 @@ interface ICirclePag {
   setActiveIndex: Dispatch<SetStateAction<number>>
   rotatePag: (index: number) => [number, number]
   paginationText: string
+  pagHash: string
 }
 
 /**
@@ -18,6 +19,7 @@ interface ICirclePag {
  * @param { setActiveIndex } setActiveIndex Диспатч для изменения активной точки
  * @param { rotatePag } rotatePag Функция расчета смещения точки для выставления на окружности
  * @param { paginationText } paginationText Текст, располагающийся рядом с активной точкой
+ * @param { pagHash } pagHash Хэш для класса pag
  */
 export const CirclePag: FC<ICirclePag> = ({
   index,
@@ -25,6 +27,7 @@ export const CirclePag: FC<ICirclePag> = ({
   setActiveIndex,
   rotatePag,
   paginationText,
+  pagHash,
 }) => {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -65,7 +68,7 @@ export const CirclePag: FC<ICirclePag> = ({
   return (
     <>
       <div
-        className={`${style.pag_container} pag`}
+        className={`${style.pag_container} pag${pagHash}`}
         style={{
           left: rotatePag(index)[0],
           top: rotatePag(index)[1],
