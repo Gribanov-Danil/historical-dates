@@ -1,14 +1,11 @@
 .container {
     position: absolute;
-    grid-column: 6 / 13;
-    /* 53/192 - соотношение размера контейнера к ширине 1920рх */
-    width: calc(100vw * calc(53 / 192));
-    height: calc(100vw * calc(53 / 192));
-    /* (100vw / 24) - размер колонны грида  */
-    /* 0.6875 - отношение отступа контейнера от 10 колонны грида */
-    margin-left: calc((100vw / 24) * 0.6875);
+    width: calc(100vw * var(--circle-container-proportion));
+    height: calc(100vw * var(--circle-container-proportion));
+    left: 50%;
     border: 1px solid rgba(48, 62, 88, 0.2);
     border-radius: 50%;
+    transform: translateX(-50%);
 }
 
 .wrapper {

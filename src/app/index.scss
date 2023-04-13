@@ -20,14 +20,14 @@
   position: absolute;
   top: -11px;
   left: 17px;
-  content: url(../../assets/images/swiper-button-next.svg);
+  content: url(../assets/images/swiper-button-next.svg);
 }
 
 .swiper-button-prev::after {
   position: absolute;
   top: -11px;
   left: 15px;
-  content: url(../../assets/images/swiper-button-prev.svg);
+  content: url(../assets/images/swiper-button-prev.svg);
 }
 
 .swiper-button-disabled {

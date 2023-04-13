@@ -3,6 +3,8 @@
     --iris: #3877ee;
     --fuschia: #ef5da8;
     --grey: #f4f5f9;
+    /* 53/192 - соотношение размера контейнера к ширине 1920рх */
+    --circle-container-proportion: calc(53/192);
 }
 
 @font-face {

@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from "react"
-import { Swiper as SwiperClass } from "swiper/types"
+import { Swiper as SwiperClass, SwiperOptions } from "swiper/types"
 import { getInnerWidth } from "../../utils/getInnerWidth"
 import { Circ, gsap } from "gsap"
 import styles from "./historical-dates.module.css"
@@ -31,6 +31,25 @@ interface ISwiperState {
 interface IHistoricalDates {
   data: IData[]
   title: string
+}
+
+const swiperBreakpoints: { [p: number]: SwiperOptions; [p: string]: SwiperOptions } = {
+  1200: {
+    slidesPerView: 3,
+    spaceBetween: 80,
+  },
+  820: {
+    slidesPerView: 2,
+    spaceBetween: 80,
+  },
+  650: {
+    slidesPerView: 3,
+    spaceBetween: 50,
+  },
+  512: {
+    slidesPerView: 2,
+    spaceBetween: 50,
+  },
 }
 
 /**
@@ -135,24 +154,7 @@ export const HistoricalDates: FC<IHistoricalDates> = ({ data, title }) => {
                 setSwiperState({ isEnd: swiper?.isEnd, isBeginning: swiper?.isBeginning })
               }
             }}
-            breakpoints={{
-              1200: {
-                slidesPerView: 3,
-                spaceBetween: 80,
-              },
-              820: {
-                slidesPerView: 2,
-                spaceBetween: 80,
-              },
-              650: {
-                slidesPerView: 3,
-                spaceBetween: 50,
-              },
-              512: {
-                slidesPerView: 2,
-                spaceBetween: 50,
-              },
-            }}
+            breakpoints={swiperBreakpoints}
           >
             <>
               {data[activeIndex].info.map((dataItem, index) => {
