@@ -1,5 +1,5 @@
 .swiper-button-prev {
-  left: -80px;
+  left: calc(-100vw / 24);
   width: 40px;
   height: 40px;
   background-color: #fff;
@@ -8,8 +8,7 @@
 }
 
 .swiper-button-next {
-  right: -80px;
-  //top: 65px;
+  right: calc(-100vw / 24);
   width: 40px;
   height: 40px;
   background-color: #fff;
@@ -35,4 +34,17 @@
   opacity: 1;
   background: rgba(0,0,0,0);
   box-shadow: none;
+}
+
+.disable {
+  display: none;
+}
+
+@media (max-width: 820px) {
+  .swiper-button-next {
+    display: none;
+  }
+  .swiper-button-prev {
+    display: none;
+  }
 }

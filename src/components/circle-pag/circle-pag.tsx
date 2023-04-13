@@ -6,7 +6,7 @@ interface ICirclePag {
   index: number
   activeIndex: number
   setActiveIndex: Dispatch<SetStateAction<number>>
-  rotatePag: (index: number, activeIndex: number) => [number, number]
+  rotatePag: (index: number) => [number, number]
   paginationText: string
 }
 
@@ -58,8 +58,8 @@ export const CirclePag: FC<ICirclePag> = ({
       <div
         className={`${style.pag_container} pag`}
         style={{
-          left: rotatePag(index, activeIndex)[0],
-          top: rotatePag(index, activeIndex)[1],
+          left: rotatePag(index)[0],
+          top: rotatePag(index)[1],
         }}
       >
         <span

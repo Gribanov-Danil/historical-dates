@@ -1,13 +1,23 @@
 .container {
     position: absolute;
     grid-column: 6 / 13;
+    /* 53/192 - соотношение размера контейнера к ширине 1920рх */
     width: calc(100vw * calc(53 / 192));
     height: calc(100vw * calc(53 / 192));
-    margin-left: 55px;
+    /* (100vw / 24) - размер колонны грида  */
+    /* 0.6875 - отношение отступа контейнера от 10 колонны грида */
+    margin-left: calc((100vw / 24) * 0.6875);
     border: 1px solid rgba(48, 62, 88, 0.2);
     border-radius: 50%;
 }
 
 .wrapper {
     position: relative;
+}
+
+@media (max-width: 820px) {
+    .container {
+        border: none;
+    }
+
 }

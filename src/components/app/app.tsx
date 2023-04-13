@@ -24,6 +24,11 @@ interface IPrevState {
   secondYear: string
 }
 
+interface ITest {
+  isBeginning: boolean
+  isEnd: boolean
+}
+
 function App() {
   const mockData: IData[] = [
     {
@@ -50,6 +55,18 @@ function App() {
       info: "",
       paginationText: "test",
     },
+    {
+      firstYear: "1914",
+      secondYear: "1918",
+      info: "",
+      paginationText: "WW1",
+    },
+    {
+      firstYear: "2015",
+      secondYear: "2022",
+      info: "",
+      paginationText: "Наука",
+    },
   ]
   const [state] = useState(mockData)
   const [activeIndex, setActiveIndex] = useState(0)
@@ -58,6 +75,7 @@ function App() {
   const ref = useRef<SwiperRef>(null)
   const gridRef = useRef<HTMLDivElement>(null)
   const [swiper, setSwiper] = useState<SwiperClass>()
+  const [swiperState, setSwiperState] = useState<ITest>({ isBeginning: true, isEnd: false })
   useEffect(() => {
     if (ref?.current?.swiper) {
       setSwiper(ref?.current?.swiper)
@@ -98,7 +116,7 @@ function App() {
         </div>
         <div className={styles.swiper}>
           <button
-            className="swiper-button-prev"
+            className={`swiper-button-prev ${swiperState.isBeginning ? "disable" : ""}`}
             onClick={() => {
               if (swiper) {
                 swiper.slidePrev()
@@ -107,10 +125,26 @@ function App() {
           ></button>
           <Swiper
             ref={ref}
-            slidesPerView={3}
-            spaceBetween={80}
+            slidesPerView={1.5}
+            spaceBetween={25}
             modules={[Navigation]}
             className="my_swiper"
+            onSlideChange={() => {
+              swiper?.update()
+              if (swiper) {
+                setSwiperState({ isEnd: swiper?.isEnd, isBeginning: swiper?.isBeginning })
+              }
+            }}
+            breakpoints={{
+              1200: {
+                slidesPerView: 3,
+                spaceBetween: 80,
+              },
+              820: {
+                slidesPerView: 2,
+                spaceBetween: 50,
+              },
+            }}
           >
             <SwiperSlide>
               <Slide
@@ -144,7 +178,7 @@ function App() {
             </SwiperSlide>
           </Swiper>
           <button
-            className="swiper-button-next"
+            className={`swiper-button-next ${swiperState.isEnd ? "disable" : ""}`}
             onClick={() => {
               if (swiper) {
                 swiper.slideNext()

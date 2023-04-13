@@ -7,7 +7,7 @@ interface IPagNavigation {
   setActiveIndex: Dispatch<SetStateAction<number>>
 }
 
-enum ButtonDestination {
+export enum ButtonDestination {
   PREV = -1,
   NEXT = 1,
 }
@@ -24,7 +24,11 @@ export const PagNavigation: FC<IPagNavigation> = ({ dataLength, activeIndex, set
   }
   return (
     <>
-      <span className={styles.counter}>{`${activeIndex + 1}/${dataLength}`}</span>
+      <span className={styles.counter}>
+        {`${(activeIndex + 1).toString().padStart(2, "0")}/${dataLength
+          .toString()
+          .padStart(2, "0")}`}
+      </span>
       <div className={styles.nav_buttons_container}>
         <button
           className={`${styles.btn} ${isMinIndex ? styles.btn__disable : ""}`}

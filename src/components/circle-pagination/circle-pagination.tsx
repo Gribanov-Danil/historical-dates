@@ -3,6 +3,7 @@ import { IData } from "../app/app"
 import style from "./pagination.module.css"
 import * as gsap from "gsap"
 import { CirclePag } from "../circle-pag/circle-pag"
+import { getInnerWidth } from "../../utils/getInnerWidth"
 
 interface ICirclePagination {
   data: IData[]
@@ -18,25 +19,28 @@ export const CirclePagination: FC<ICirclePagination> = ({
   gridRef,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [pageWidth, setPageWidth] = useState(window.innerWidth)
-  const [pageHeight, setPageHeight] = useState(window.innerHeight)
+  const [pageWidth, setPageWidth] = useState(getInnerWidth())
 
   let gridElementHeight = 0
   if (gridRef.current?.offsetHeight) {
     gridElementHeight = gridRef.current.offsetHeight
   }
-  console.log(pageHeight)
-  // console.log(gridElementHeight)
-  const handleWindowSizeChange = () => {
-    setPageWidth(window.innerWidth)
-  }
+
+  const handleWindowSizeChange = () => setPageWidth(getInnerWidth())
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowSizeChange)
     return () => window.removeEventListener("resize", handleWindowSizeChange)
   }, [])
 
-  const rotatePag = (index: number, activeIndex: number): [number, number] => {
+  const getContainerMarginTop = (pageWidth: number) =>
+    pageWidth <= 820 ? 0 : gridElementHeight * 0.4444 - (pageWidth * (53 / 192)) / 2
+
+  // useEffect(() => {
+  //
+  // })
+
+  const rotatePag = (index: number): [number, number] => {
     const R = (pageWidth * (53 / 192)) / 2
     const activePagSize = 56
     const gridColumnWidth = pageWidth / 24
@@ -74,13 +78,11 @@ export const CirclePagination: FC<ICirclePagination> = ({
   const getPaginationText = (dataItem: IData) =>
     dataItem.paginationText ? dataItem.paginationText : ""
 
-  // margin-top: calc((100vh - calc(100vw * calc(53 / 192))) / 2);
-
   return (
     <div
       ref={containerRef}
       className={style.container}
-      style={{ marginTop: (gridElementHeight - pageWidth * (53 / 192)) / 2 }}
+      style={{ marginTop: getContainerMarginTop(pageWidth) }}
     >
       <div className={style.wrapper}>
         {data.map((dataItem, index) => {
