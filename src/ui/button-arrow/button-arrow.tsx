@@ -1,6 +1,6 @@
 import { FC, useState } from "react"
 import styles from "./button-arrow.module.css"
-import { getInnerWidth } from "../../../utils/getInnerWidth"
+import { getInnerWidth } from "../../utils/getInnerWidth"
 
 interface IButtonArrow {
   isActive: boolean

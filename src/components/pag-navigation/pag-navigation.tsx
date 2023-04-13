@@ -1,7 +1,7 @@
 import styles from "./pag-navigation.module.css"
 import { Dispatch, FC, SetStateAction, useState } from "react"
 import { getInnerWidth } from "../../utils/getInnerWidth"
-import { ButtonArrow } from "../ui/button-arrow/button-arrow"
+import { ButtonArrow } from "../../ui/button-arrow/button-arrow"
 
 interface IPagNavigation {
   activeIndex: number
