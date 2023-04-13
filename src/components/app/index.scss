@@ -48,3 +48,12 @@
     display: none;
   }
 }
+
+@media (max-width: 512px) {
+  .swiper-slide {
+    opacity: 0.4;
+  }
+  .swiper-slide-active {
+    opacity: 1;
+  }
+}
